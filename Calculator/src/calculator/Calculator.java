@@ -1,5 +1,6 @@
 package calculator;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -13,7 +14,6 @@ import javax.swing.border.EmptyBorder;
 public class Calculator extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField_hienthi;
 
 	/**
 	 * Launch the application.
@@ -26,9 +26,8 @@ public class Calculator extends JFrame {
 					frame.setVisible(true);
 					frame.setLocationRelativeTo(null);
 					frame.setTitle("Calculator");
-					
-					
-				} catch (Exception e) {
+				} 
+				catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
@@ -47,18 +46,8 @@ public class Calculator extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		  
-		//Hiển thị 
-		textField_hienthi = new JTextField();
-		textField_hienthi.setBorder(null);
-		textField_hienthi.setBackground(new Color(0, 0, 0));
-		textField_hienthi.setFont(new Font("Calibri", Font.BOLD, 30));
-		textField_hienthi.setEditable(false);
-		textField_hienthi.setBounds(0, 21, 329, 63);
-		contentPane.add(textField_hienthi);
-		textField_hienthi.setColumns(10);
 		
 		//---------Các button số từ 0 đến 9---------
-		
 		JButton btn_so_0 = new JButton("0\r\n");
 		btn_so_0.setBorder(null);
 		btn_so_0.setBackground(new Color(255, 102, 0));
@@ -253,6 +242,6 @@ public class Calculator extends JFrame {
 		btn_xoa1phantu.setBackground(new Color(255, 51, 0));
 		btn_xoa1phantu.setBounds(88, 180, 80, 50);
 		contentPane.add(btn_xoa1phantu);
-		
 	}
+
 }
