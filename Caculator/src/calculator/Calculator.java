@@ -1,28 +1,14 @@
 package calculator;
 
-import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import java.awt.GridLayout;
-import javax.swing.JButton;
-import java.awt.Color;
-import java.awt.GridBagLayout;
-import java.awt.Font;
-import javax.swing.SwingConstants;
 import javax.swing.JTextField;
-import javax.swing.JLabel;
-import java.awt.Label;
-
-import com.jgoodies.forms.factories.Borders;
-import com.jgoodies.forms.factories.DefaultComponentFactory;
-import javax.swing.JTable;
-import java.awt.SystemColor;
-import java.awt.Dialog.ModalExclusionType;
-import javax.swing.DropMode;
-import java.awt.Toolkit;
+import javax.swing.border.EmptyBorder;
 
 public class Calculator extends JFrame {
 
