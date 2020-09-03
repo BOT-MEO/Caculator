@@ -18,6 +18,20 @@ import javax.swing.SwingConstants;
 import java.awt.Window.Type;
 import java.awt.Toolkit;
 import java.math.*;
+import javax.swing.JEditorPane;
+import java.awt.List;
+import javax.swing.JPopupMenu;
+import java.awt.Component;
+import javax.swing.JMenuItem;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import java.awt.Insets;
+import javax.swing.ImageIcon;
+import javax.swing.KeyStroke;
+import java.awt.event.KeyEvent;
+import javax.swing.UIManager;
+import java.awt.Dialog.ModalExclusionType;
+import javax.swing.JCheckBoxMenuItem;
 
 public class Calculator extends JFrame {
 
@@ -52,15 +66,15 @@ public class Calculator extends JFrame {
 	 * Create the frame.
 	 */
 	public Calculator() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("E:\\Lessons in my University\\Lap Trinh Huong Doi Tuong\\Máy tính đơn giản\\Icon\\Apps-Calculator-icon.png"));
-
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Admin\\git\\repository\\Calculator\\src\\calculator\\Icon\\Apps-Calculator-icon.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 355, 566);
+		setBounds(100, 100, 355, 565 );
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(0, 0, 0));
+		contentPane.setBackground(new Color(247, 97, 87));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
 		  
 		
 		//---------Các button số từ 0 đến 9---------
@@ -70,8 +84,9 @@ public class Calculator extends JFrame {
 				textField_hienthi.setText(textField_hienthi.getText()+0);
 			}
 		});
+		btn_so_0.setFocusPainted(false);
 		btn_so_0.setBorder(null);
-		btn_so_0.setBackground(new Color(255, 102, 0));
+		btn_so_0.setBackground(new Color(0, 102, 204));
 		btn_so_0.setFont(new Font("Calibri", Font.BOLD, 30));
 		btn_so_0.setForeground(new Color(255, 255, 255));
 		btn_so_0.setBounds(5, 470, 163, 50);
@@ -83,8 +98,9 @@ public class Calculator extends JFrame {
 				textField_hienthi.setText(textField_hienthi.getText()+1);
 			}
 		});
+		btn_so_1.setFocusPainted(false);
 		btn_so_1.setBorder(null);
-		btn_so_1.setBackground(new Color(255, 102, 0));
+		btn_so_1.setBackground(new Color(0, 102, 204));
 		btn_so_1.setFont(new Font("Calibri", Font.BOLD, 30));
 		btn_so_1.setForeground(new Color(255, 255, 255));
 		btn_so_1.setBounds(5, 417, 80, 50);
@@ -96,8 +112,9 @@ public class Calculator extends JFrame {
 				textField_hienthi.setText(textField_hienthi.getText()+2);
 			}
 		});
+		btn_so_2.setFocusPainted(false);
 		btn_so_2.setBorder(null);
-		btn_so_2.setBackground(new Color(255, 102, 0));
+		btn_so_2.setBackground(new Color(0, 102, 204));
 		btn_so_2.setFont(new Font("Calibri", Font.BOLD, 30));
 		btn_so_2.setForeground(new Color(255, 255, 255));
 		btn_so_2.setBounds(88, 417, 80, 50);
@@ -109,8 +126,9 @@ public class Calculator extends JFrame {
 				textField_hienthi.setText(textField_hienthi.getText()+3);
 			}
 		});
+		btn_so_3.setFocusPainted(false);
 		btn_so_3.setBorder(null);
-		btn_so_3.setBackground(new Color(255, 102, 0));
+		btn_so_3.setBackground(new Color(0, 102, 204));
 		btn_so_3.setFont(new Font("Calibri", Font.BOLD, 30));
 		btn_so_3.setForeground(new Color(255, 255, 255));
 		btn_so_3.setBounds(171, 417, 80, 50);
@@ -123,8 +141,9 @@ public class Calculator extends JFrame {
 				textField_hienthi.setText(textField_hienthi.getText()+4);
 			}
 		});
+		btn_so_4.setFocusPainted(false);
 		btn_so_4.setBorder(null);
-		btn_so_4.setBackground(new Color(255, 102, 0));
+		btn_so_4.setBackground(new Color(0, 102, 204));
 		btn_so_4.setFont(new Font("Calibri", Font.BOLD, 30));
 		btn_so_4.setForeground(new Color(255, 255, 255));
 		btn_so_4.setBounds(5, 364, 80, 50);
@@ -136,8 +155,9 @@ public class Calculator extends JFrame {
 				textField_hienthi.setText(textField_hienthi.getText()+5);
 			}
 		});
+		btn_so_5.setFocusPainted(false);
 		btn_so_5.setBorder(null);
-		btn_so_5.setBackground(new Color(255, 102, 0));
+		btn_so_5.setBackground(new Color(0, 102, 204));
 		btn_so_5.setFont(new Font("Calibri", Font.BOLD, 30));
 		btn_so_5.setForeground(new Color(255, 255, 255));
 		btn_so_5.setBounds(88, 364, 80, 50);
@@ -149,8 +169,9 @@ public class Calculator extends JFrame {
 				textField_hienthi.setText(textField_hienthi.getText()+6);
 			}
 		});
+		btn_so_6.setFocusPainted(false);
 		btn_so_6.setBorder(null);
-		btn_so_6.setBackground(new Color(255, 102, 0));
+		btn_so_6.setBackground(new Color(0, 102, 204));
 		btn_so_6.setFont(new Font("Calibri", Font.BOLD, 30));
 		btn_so_6.setForeground(new Color(255, 255, 255));
 		btn_so_6.setBounds(171, 364, 80, 50);
@@ -162,8 +183,9 @@ public class Calculator extends JFrame {
 				textField_hienthi.setText(textField_hienthi.getText()+7);
 			}
 		});
+		btn_so_7.setFocusPainted(false);
 		btn_so_7.setBorder(null);
-		btn_so_7.setBackground(new Color(255, 102, 0));
+		btn_so_7.setBackground(new Color(0, 102, 204));
 		btn_so_7.setFont(new Font("Calibri", Font.BOLD, 30));
 		btn_so_7.setForeground(new Color(255, 255, 255));
 		btn_so_7.setBounds(5, 311, 80, 50);
@@ -175,8 +197,9 @@ public class Calculator extends JFrame {
 				textField_hienthi.setText(textField_hienthi.getText()+8);
 			}
 		});
+		btn_so_8.setFocusPainted(false);
 		btn_so_8.setBorder(null);
-		btn_so_8.setBackground(new Color(255, 102, 0));
+		btn_so_8.setBackground(new Color(0, 102, 204));
 		btn_so_8.setFont(new Font("Calibri", Font.BOLD, 30));
 		btn_so_8.setForeground(new Color(255, 255, 255));
 		btn_so_8.setBounds(88, 311, 80, 50);
@@ -188,8 +211,9 @@ public class Calculator extends JFrame {
 				textField_hienthi.setText(textField_hienthi.getText()+9);
 			}
 		});
+		btn_so_9.setFocusPainted(false);
 		btn_so_9.setBorder(null);
-		btn_so_9.setBackground(new Color(255, 102, 0));
+		btn_so_9.setBackground(new Color(0, 102, 204));
 		btn_so_9.setFont(new Font("Calibri", Font.BOLD, 30));
 		btn_so_9.setForeground(new Color(255, 255, 255));
 		btn_so_9.setBounds(171, 311, 80, 50);
@@ -202,8 +226,9 @@ public class Calculator extends JFrame {
 				textField_hienthi.setText(textField_hienthi.getText()+".");
 			}
 		});
+		btn_sothuc.setFocusPainted(false);
 		btn_sothuc.setBorder(null);
-		btn_sothuc.setBackground(new Color(255, 102, 0));
+		btn_sothuc.setBackground(new Color(0, 102, 204));
 		btn_sothuc.setFont(new Font("Calibri", Font.BOLD, 30));
 		btn_sothuc.setForeground(new Color(255, 255, 255));
 		btn_sothuc.setBounds(171, 470, 80, 50);
@@ -217,8 +242,9 @@ public class Calculator extends JFrame {
 				textField_hienthi.setText(String.valueOf(ops));
 			}
 		});
+		btn_am.setFocusPainted(false);
 		btn_am.setBorder(null);
-		btn_am.setBackground(new Color(255, 51, 0));
+		btn_am.setBackground(new Color(0, 102, 204));
 		btn_am.setFont(new Font("Calibri", Font.BOLD, 30));
 		btn_am.setForeground(new Color(255, 255, 255));
 		btn_am.setBounds(171, 258, 80, 50);
@@ -230,10 +256,11 @@ public class Calculator extends JFrame {
 				textField_hienthi.setText(textField_hienthi.getText()+"π");
 			}
 		});
+		btn_pi.setFocusPainted(false);
 		btn_pi.setForeground(Color.WHITE);
 		btn_pi.setFont(new Font("Calibri", Font.BOLD, 25));
 		btn_pi.setBorder(null);
-		btn_pi.setBackground(new Color(255, 51, 0));
+		btn_pi.setBackground(new Color(0, 102, 204));
 		btn_pi.setBounds(254, 205, 80, 50);
 		contentPane.add(btn_pi);
 		
@@ -245,10 +272,11 @@ public class Calculator extends JFrame {
 				operation = "phantram";
 			}
 		});
+		btn_phantram.setFocusPainted(false);
 		btn_phantram.setForeground(Color.WHITE);
 		btn_phantram.setFont(new Font("Calibri", Font.BOLD, 25));
 		btn_phantram.setBorder(null);
-		btn_phantram.setBackground(new Color(255, 51, 0));
+		btn_phantram.setBackground(new Color(0, 102, 204));
 		btn_phantram.setBounds(171, 205, 80, 50);
 		contentPane.add(btn_phantram);
 		
@@ -259,8 +287,9 @@ public class Calculator extends JFrame {
 				operation = "sqrt";
 			}
 		});
+		btn_canbac2.setFocusPainted(false);
 		btn_canbac2.setBorder(null);
-		btn_canbac2.setBackground(new Color(255, 51, 0));
+		btn_canbac2.setBackground(new Color(0, 102, 204));
 		btn_canbac2.setFont(new Font("Calibri", Font.BOLD, 25));
 		btn_canbac2.setForeground(new Color(255, 255, 255));
 		btn_canbac2.setBounds(88, 258, 80, 50);
@@ -275,10 +304,11 @@ public class Calculator extends JFrame {
 				textField_ketqua.setText(String.valueOf(Math.pow(num_pow,2)));
 			}
 		});
+		btn_xmun.setFocusPainted(false);
 		btn_xmun.setBorder(null);
 		btn_xmun.setForeground(new Color(255, 255, 255));
 		btn_xmun.setFont(new Font("Calibri", Font.BOLD, 25));
-		btn_xmun.setBackground(new Color(255, 51, 0));
+		btn_xmun.setBackground(new Color(0, 102, 204));
 		btn_xmun.setBounds(5, 258, 80, 50);
 		contentPane.add(btn_xmun);
 		
@@ -291,9 +321,10 @@ public class Calculator extends JFrame {
 				operation = "+";
 			}
 		});
+		btn_cong.setFocusPainted(false);
 		btn_cong.setBorder(null);
 		btn_cong.setForeground(new Color(255, 255, 255));
-		btn_cong.setBackground(new Color(255, 51, 0));
+		btn_cong.setBackground(new Color(0, 102, 204));
 		btn_cong.setFont(new Font("Calibri", Font.BOLD, 30));
 		btn_cong.setBounds(254, 417, 80, 50);
 		contentPane.add(btn_cong);
@@ -306,9 +337,10 @@ public class Calculator extends JFrame {
 				operation = "-";
 			}
 		});
+		btn_tru.setFocusPainted(false);
 		btn_tru.setBorder(null);
 		btn_tru.setForeground(new Color(255, 255, 255));
-		btn_tru.setBackground(new Color(255, 51, 0));
+		btn_tru.setBackground(new Color(0, 102, 204));
 		btn_tru.setFont(new Font("Calibri", Font.BOLD, 30));
 		btn_tru.setBounds(254, 364, 80, 50);
 		contentPane.add(btn_tru);
@@ -322,8 +354,9 @@ public class Calculator extends JFrame {
 
 			}
 		});
+		btn_nhan.setFocusPainted(false);
 		btn_nhan.setBorder(null);
-		btn_nhan.setBackground(new Color(255, 51, 0));
+		btn_nhan.setBackground(new Color(0, 102, 204));
 		btn_nhan.setForeground(new Color(255, 255, 255));
 		btn_nhan.setFont(new Font("Calibri", Font.BOLD, 30));
 		btn_nhan.setBounds(254, 311, 80, 50);
@@ -337,9 +370,10 @@ public class Calculator extends JFrame {
 				operation = "/";
 			}
 		});
+		btn_chia.setFocusPainted(false);
 		btn_chia.setBorder(null);
 		btn_chia.setForeground(new Color(255, 255, 255));
-		btn_chia.setBackground(new Color(255, 51, 0));
+		btn_chia.setBackground(new Color(0, 102, 204));
 		btn_chia.setFont(new Font("Calibri", Font.BOLD, 30));
 		btn_chia.setBounds(254, 258, 80, 50);
 		contentPane.add(btn_chia);
@@ -383,9 +417,10 @@ public class Calculator extends JFrame {
 				}
 			}
 		});
+		btn_bang.setFocusPainted(false);
 		btn_bang.setBorder(null);
 		btn_bang.setForeground(new Color(255, 255, 255));
-		btn_bang.setBackground(new Color(255, 51, 0));
+		btn_bang.setBackground(new Color(0, 102, 204));
 		btn_bang.setFont(new Font("Calibri", Font.BOLD, 30));
 		btn_bang.setBounds(254, 470, 80, 50);
 		contentPane.add(btn_bang);
@@ -399,10 +434,11 @@ public class Calculator extends JFrame {
 				textField_ketqua.setText(null);
 			}
 		});
+		btn_xoahet.setFocusPainted(false);
 		btn_xoahet.setForeground(new Color(255, 255, 255));
 		btn_xoahet.setFont(new Font("Calibri", Font.BOLD, 25));
 		btn_xoahet.setBorder(null);
-		btn_xoahet.setBackground(new Color(255, 51, 0));
+		btn_xoahet.setBackground(new Color(0, 102, 204));
 		btn_xoahet.setBounds(5, 205, 80, 50);
 		contentPane.add(btn_xoahet);
 		
@@ -418,20 +454,21 @@ public class Calculator extends JFrame {
 				}
 			}
 		});
+		btn_xoa1phantu.setFocusPainted(false);
 		btn_xoa1phantu.setForeground(Color.WHITE);
 		btn_xoa1phantu.setFont(new Font("Calibri", Font.BOLD, 25));
 		btn_xoa1phantu.setBorder(null);
-		btn_xoa1phantu.setBackground(new Color(255, 51, 0));
+		btn_xoa1phantu.setBackground(new Color(0, 102, 204));
 		btn_xoa1phantu.setBounds(88, 205, 80, 50);
 		contentPane.add(btn_xoa1phantu);
 		
-		//--------- Hiển thị ---------
+		//---------Hiển thị---------
 		textField_hienthi = new JTextField();
-		textField_hienthi.setBorder(null);
-		textField_hienthi.setBackground(new Color(0, 0, 0));
-		textField_hienthi.setHorizontalAlignment(SwingConstants.TRAILING);
 		textField_hienthi.setEditable(false);
-		textField_hienthi.setFont(new Font("Calibri", Font.BOLD, 20));
+		textField_hienthi.setBorder(null);
+		textField_hienthi.setBackground(new Color(247, 97, 87));
+		textField_hienthi.setHorizontalAlignment(SwingConstants.TRAILING);
+		textField_hienthi.setFont(new Font("Calibri", Font.BOLD, 25));
 		textField_hienthi.setForeground(Color.WHITE);
 		textField_hienthi.setBounds(5, 70, 329, 60);
 		contentPane.add(textField_hienthi);
@@ -439,13 +476,31 @@ public class Calculator extends JFrame {
 		
 		textField_ketqua = new JTextField();
 		textField_ketqua.setBorder(null);
-		textField_ketqua.setBackground(Color.BLACK);
+		textField_ketqua.setBackground(new Color(247, 97, 87));
 		textField_ketqua.setHorizontalAlignment(SwingConstants.TRAILING);
 		textField_ketqua.setEditable(false);
 		textField_ketqua.setFont(new Font("Calibri", Font.BOLD, 25));
 		textField_ketqua.setForeground(Color.WHITE);
 		textField_ketqua.setColumns(10);
-		textField_ketqua.setBounds(5, 134, 329, 60);
+		textField_ketqua.setBounds(5, 132, 329, 60);
 		contentPane.add(textField_ketqua);
+		
+	}
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
 	}
 }
