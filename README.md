@@ -1,9 +1,6 @@
-<<<<<<< HEAD
-Ý tưởng:
-=======
-<h1>Miêu tả: </h1>
 
->>>>>>> branch 'master' of https://github.com/BOT-MEO/Calculator.git
+Ý tưởng:
+<h1>Miêu tả: </h1>
 - Đây là một máy tính tay đơn giản mình áp dụng những kiến thức về môn lập trình hướng đối tượng 
 - Sử dụng ngôn ngữ lập trình Java với IDE Eclipse
 Miêu tả:
