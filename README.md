@@ -8,5 +8,5 @@ Miêu tả:
 
 <h1>Các phiên bản: </h1>
 
-- Version 0.1: Có chức năng tính toán cộng trừ nhân chia cơ bản và các chức năng phụ nhưng căn bậc 2, bình phương, phần trăm
+- Version 0.1: Có chức năng tính toán cộng trừ nhân chia cơ bản 
 
