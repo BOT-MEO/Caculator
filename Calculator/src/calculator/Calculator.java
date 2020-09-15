@@ -1,15 +1,30 @@
+/*
+ * @name        Simple Calculator
+ * @package     calculator
+ * @file        Calculator.java
+ * @author      Tống Hoàng Hải
+ * @email       haivip18620@gmail.com
+ * @github      https://github.com/BOT-MEO
+ */
 package calculator;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.util.*;
+import java.util.regex.Pattern;
+import java.math.*;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+
+import jdk.jfr.Enabled;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
@@ -32,12 +47,26 @@ import java.awt.event.KeyEvent;
 import javax.swing.UIManager;
 import java.awt.Dialog.ModalExclusionType;
 import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JComboBox;
+import java.awt.Choice;
+import javax.swing.DefaultComboBoxModel;
 
 public class Calculator extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField_hienthi;
-	private JTextField textField_ketqua;
+	private JMenuItem length;
+	private JMenuItem standard;
+	private JMenuItem temperature;
+	private JTextField standard_hienthi;
+	private JTextField standard_ketqua;
+	private JTextField length_hienthi;
+	private JTextField length_ketqua;
+	private JTextField temperature_hienthi;
+	private JTextField temperature_ketqua;
+	private JComboBox length_donvi_1;
+	private JComboBox length_donvi_2;
+	private JComboBox temperature_donvi_1;
+	private JComboBox temperature_donvi_2;
 	double firstnumbers;
 	double secondnumbers;
 	String operation;
@@ -54,6 +83,14 @@ public class Calculator extends JFrame {
 					frame.setLocationRelativeTo(null);
 					frame.setTitle("Calculator");
 					frame.setSize(355, 566);
+					frame.length_hienthi.setVisible(false);
+					frame.length_ketqua.setVisible(false);
+					frame.length_donvi_1.setVisible(false);
+					frame.length_donvi_2.setVisible(false);
+					frame.temperature_hienthi.setVisible(false);
+					frame.temperature_ketqua.setVisible(false);
+					frame.temperature_donvi_1.setVisible(false);
+					frame.temperature_donvi_2.setVisible(false);
 				} 
 				catch (Exception e) {
 					e.printStackTrace();
@@ -75,13 +112,164 @@ public class Calculator extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		  
+		//---------Hiển thị---------   
+		standard_hienthi = new JTextField();
+		standard_hienthi.setEditable(false);
+		standard_hienthi.setBorder(null);
+		standard_hienthi.setBackground(new Color(247, 97, 87));
+		standard_hienthi.setHorizontalAlignment(SwingConstants.TRAILING);
+		standard_hienthi.setFont(new Font("Calibri", Font.BOLD, 25));
+		standard_hienthi.setForeground(Color.WHITE);
+		standard_hienthi.setBounds(5, 70, 329, 60);
+		contentPane.add(standard_hienthi);
+		standard_hienthi.setColumns(10);
+					
+		standard_ketqua = new JTextField();
+		standard_ketqua.setBorder(null);
+		standard_ketqua.setBackground(new Color(247, 97, 87));
+		standard_ketqua.setHorizontalAlignment(SwingConstants.TRAILING);
+		standard_ketqua.setEditable(false);
+		standard_ketqua.setFont(new Font("Calibri", Font.BOLD, 25));
+		standard_ketqua.setForeground(Color.WHITE);
+		standard_ketqua.setColumns(10);
+		standard_ketqua.setBounds(5, 132, 329, 60);
+		contentPane.add(standard_ketqua);
+			
+		length_hienthi = new JTextField();
+		length_hienthi.setFont(new Font("Calibri", Font.BOLD, 20));
+		length_hienthi.setHorizontalAlignment(SwingConstants.TRAILING);
+		length_hienthi.setColumns(10);
+		length_hienthi.setEditable(false);
+		length_hienthi.setBorder(null);
+		length_hienthi.setBackground(new Color(247, 97, 87));
+		length_hienthi.setForeground(Color.WHITE);
+		length_hienthi.setBounds(5, 39, 329, 50);
+		contentPane.add(length_hienthi);
+			
+	    length_ketqua = new JTextField();
+		length_ketqua.setFont(new Font("Calibri", Font.BOLD, 20));
+		length_ketqua.setHorizontalAlignment(SwingConstants.TRAILING);
+		length_ketqua.setColumns(10);
+		length_ketqua.setEditable(false);
+		length_ketqua.setBorder(null);
+		length_ketqua.setBackground(new Color(247, 97, 87));
+		length_ketqua.setForeground(Color.WHITE);
+		length_ketqua.setBounds(5, 124, 329, 50);
+		contentPane.add(length_ketqua);
+		
+		temperature_hienthi = new JTextField();
+		temperature_hienthi.setFont(new Font("Calibri", Font.BOLD, 20));
+		temperature_hienthi.setHorizontalAlignment(SwingConstants.TRAILING);
+		temperature_hienthi.setColumns(10);
+		temperature_hienthi.setEditable(false);
+		temperature_hienthi.setBorder(null);
+		temperature_hienthi.setBackground(new Color(247, 97, 87));
+		temperature_hienthi.setForeground(Color.WHITE);
+		temperature_hienthi.setBounds(5, 39, 329, 50);
+		contentPane.add(temperature_hienthi);
+			
+		temperature_ketqua = new JTextField();
+		temperature_ketqua.setFont(new Font("Calibri", Font.BOLD, 20));
+		temperature_ketqua.setHorizontalAlignment(SwingConstants.TRAILING);
+		temperature_ketqua.setColumns(10);
+		temperature_ketqua.setEditable(false);
+		temperature_ketqua.setBorder(null);
+		temperature_ketqua.setBackground(new Color(247, 97, 87));
+		temperature_ketqua.setForeground(Color.WHITE);
+		temperature_ketqua.setBounds(5, 124, 329, 50);
+		contentPane.add(temperature_ketqua);
+		
+		
+		
+		//---------Menu---------
+		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBackground(new Color(247, 97, 87));
+		menuBar.setBorderPainted(false);
+		menuBar.setBounds(0, 0, 339, 35);
+		contentPane.add(menuBar);
+				
+		JMenu mnNewMenu = new JMenu("File\r\n");
+		mnNewMenu.setFocusPainted(false);
+		mnNewMenu.setBorderPainted(false);
+		mnNewMenu.setBackground(Color.WHITE);
+		mnNewMenu.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 20));
+		mnNewMenu.setForeground(Color.WHITE);
+		menuBar.add(mnNewMenu);
+				
+		standard = new JMenuItem("Standard");
+		standard.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(standard.isEnabled()) {		
+					standard_hienthi.setVisible(true);
+					standard_ketqua.setVisible(true);
+					length_hienthi.setVisible(false);	
+					length_ketqua.setVisible(false);
+					length_donvi_1.setVisible(false);
+					length_donvi_2.setVisible(false);
+					temperature_hienthi.setVisible(false);
+					temperature_ketqua.setVisible(false);
+					temperature_donvi_1.setVisible(false);
+					temperature_donvi_2.setVisible(false);
+				}
+			}
+		});		
+		standard.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 20));
+		mnNewMenu.add(standard);
+				
+		length = new JMenuItem("Length\r\n");
+		length.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(length.isEnabled()) {
+					length_hienthi.setVisible(true);
+					length_ketqua.setVisible(true);
+					length_donvi_1.setVisible(true);
+					length_donvi_2.setVisible(true);
+					standard_hienthi.setVisible(false);
+					standard_ketqua.setVisible(false);
+					temperature_hienthi.setVisible(false);
+					temperature_ketqua.setVisible(false);
+					temperature_donvi_1.setVisible(false);
+					temperature_donvi_2.setVisible(false);
+				}
+			}
+		});
+		length.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 20));
+		mnNewMenu.add(length);
+		
+		temperature = new JMenuItem("Temperature\r\n");
+		temperature.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(temperature.isEnabled()) {
+					temperature_hienthi.setVisible(true);
+					temperature_ketqua.setVisible(true);
+					temperature_donvi_1.setVisible(true);
+					temperature_donvi_2.setVisible(true);
+					standard_hienthi.setVisible(false);
+					standard_ketqua.setVisible(false);
+					length_hienthi.setVisible(false);
+					length_ketqua.setVisible(false);
+					length_donvi_1.setVisible(false);
+					length_donvi_2.setVisible(false);
+				}		
+			}
+		});
+		temperature.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 20));
+		mnNewMenu.add(temperature);
+		
 		
 		//---------Các button số từ 0 đến 9---------
 		JButton btn_so_0 = new JButton("0\r\n");
 		btn_so_0.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textField_hienthi.setText(textField_hienthi.getText()+0);
+				if(standard.isEnabled()) {
+					standard_hienthi.setText(standard_hienthi.getText()+0);
+				}
+				if(length.isEnabled()) {
+					length_hienthi.setText(length_hienthi.getText()+0);
+				}
+				if(temperature.isEnabled()) {
+					temperature_hienthi.setText(temperature_hienthi.getText()+0);
+				}
 			}
 		});
 		btn_so_0.setFocusPainted(false);
@@ -95,7 +283,15 @@ public class Calculator extends JFrame {
 		JButton btn_so_1 = new JButton("1\r\n");
 		btn_so_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textField_hienthi.setText(textField_hienthi.getText()+1);
+				if(standard.isEnabled()) {
+					standard_hienthi.setText(standard_hienthi.getText()+1);
+				}
+				if(length.isEnabled()) {
+					length_hienthi.setText(length_hienthi.getText()+1);
+				}
+				if(temperature.isEnabled()) {
+					temperature_hienthi.setText(temperature_hienthi.getText()+1);
+				}
 			}
 		});
 		btn_so_1.setFocusPainted(false);
@@ -109,7 +305,15 @@ public class Calculator extends JFrame {
 		JButton btn_so_2 = new JButton("2\r\n");
 		btn_so_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textField_hienthi.setText(textField_hienthi.getText()+2);
+				if(standard.isEnabled()) {
+					standard_hienthi.setText(standard_hienthi.getText()+2);
+				}
+				if(length.isEnabled()) {
+					length_hienthi.setText(length_hienthi.getText()+2);
+				}
+				if(temperature.isEnabled()) {
+					temperature_hienthi.setText(temperature_hienthi.getText()+2);
+				}
 			}
 		});
 		btn_so_2.setFocusPainted(false);
@@ -123,7 +327,15 @@ public class Calculator extends JFrame {
 		JButton btn_so_3 = new JButton("3");
 		btn_so_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textField_hienthi.setText(textField_hienthi.getText()+3);
+				if(standard.isEnabled()) {
+					standard_hienthi.setText(standard_hienthi.getText()+3);
+				}
+				if(length.isEnabled()) {
+					length_hienthi.setText(length_hienthi.getText()+3);
+				}
+				if(temperature.isEnabled()) {
+					temperature_hienthi.setText(temperature_hienthi.getText()+3);
+				}
 			}
 		});
 		btn_so_3.setFocusPainted(false);
@@ -138,7 +350,15 @@ public class Calculator extends JFrame {
 		JButton btn_so_4 = new JButton("4");
 		btn_so_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textField_hienthi.setText(textField_hienthi.getText()+4);
+				if(standard.isEnabled()) {
+					standard_hienthi.setText(standard_hienthi.getText()+4);
+				}
+				if(length.isEnabled()) {
+					length_hienthi.setText(length_hienthi.getText()+4);
+				}
+				if(temperature.isEnabled()) {
+					temperature_hienthi.setText(temperature_hienthi.getText()+4);
+				}
 			}
 		});
 		btn_so_4.setFocusPainted(false);
@@ -152,7 +372,15 @@ public class Calculator extends JFrame {
 		JButton btn_so_5 = new JButton("5\r\n");
 		btn_so_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textField_hienthi.setText(textField_hienthi.getText()+5);
+				if(standard.isEnabled()) {
+					standard_hienthi.setText(standard_hienthi.getText()+5);
+				}
+				if(length.isEnabled()) {
+					length_hienthi.setText(length_hienthi.getText()+5);
+				}
+				if(temperature.isEnabled()) {
+					temperature_hienthi.setText(temperature_hienthi.getText()+5);
+				}
 			}
 		});
 		btn_so_5.setFocusPainted(false);
@@ -166,7 +394,15 @@ public class Calculator extends JFrame {
 		JButton btn_so_6 = new JButton("6");
 		btn_so_6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textField_hienthi.setText(textField_hienthi.getText()+6);
+				if(standard.isEnabled()) {
+					standard_hienthi.setText(standard_hienthi.getText()+6);
+				}
+				if(length.isEnabled()) {
+					length_hienthi.setText(length_hienthi.getText()+6);
+				}
+				if(temperature.isEnabled()) {
+					temperature_hienthi.setText(temperature_hienthi.getText()+6);
+				}
 			}
 		});
 		btn_so_6.setFocusPainted(false);
@@ -180,7 +416,15 @@ public class Calculator extends JFrame {
 		JButton btn_so_7 = new JButton("7");
 		btn_so_7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textField_hienthi.setText(textField_hienthi.getText()+7);
+				if(standard.isEnabled()) {
+					standard_hienthi.setText(standard_hienthi.getText()+7);
+				}
+				if(length.isEnabled()) {
+					length_hienthi.setText(length_hienthi.getText()+7);
+				}
+				if(temperature.isEnabled()) {
+					temperature_hienthi.setText(temperature_hienthi.getText()+7);
+				}
 			}
 		});
 		btn_so_7.setFocusPainted(false);
@@ -194,7 +438,15 @@ public class Calculator extends JFrame {
 		JButton btn_so_8 = new JButton("8");
 		btn_so_8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textField_hienthi.setText(textField_hienthi.getText()+8);
+				if(standard.isEnabled()) {
+					standard_hienthi.setText(standard_hienthi.getText()+8);
+				}
+				if(length.isEnabled()) {
+					length_hienthi.setText(length_hienthi.getText()+8);
+				}
+				if(temperature.isEnabled()) {
+					temperature_hienthi.setText(temperature_hienthi.getText()+8);
+				}
 			}
 		});
 		btn_so_8.setFocusPainted(false);
@@ -208,7 +460,15 @@ public class Calculator extends JFrame {
 		JButton btn_so_9 = new JButton("9");
 		btn_so_9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textField_hienthi.setText(textField_hienthi.getText()+9);
+				if(standard.isEnabled()) {
+					standard_hienthi.setText(standard_hienthi.getText()+9);
+				}
+				if(length.isEnabled()) {
+					length_hienthi.setText(length_hienthi.getText()+9);
+				}
+				if(temperature.isEnabled()) {
+					temperature_hienthi.setText(temperature_hienthi.getText()+9);
+				}
 			}
 		});
 		btn_so_9.setFocusPainted(false);
@@ -223,7 +483,24 @@ public class Calculator extends JFrame {
 		JButton btn_sothuc = new JButton(".");
 		btn_sothuc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textField_hienthi.setText(textField_hienthi.getText()+".");
+				if(standard.isEnabled()) {
+					if(standard_hienthi.getText().contains(".")) {
+						return;
+					}
+					standard_hienthi.setText(standard_hienthi.getText()+".");
+				}
+				if(length.isEnabled()) {
+					if(length_hienthi.getText().contains(".")) {
+						return;
+					}
+					length_hienthi.setText(length_hienthi.getText()+".");
+				}
+				if(temperature.isEnabled()) {
+					if(temperature_hienthi.getText().contains(".")) {
+						return;
+					}
+					temperature_hienthi.setText(temperature_hienthi.getText()+".");
+				}
 			}
 		});
 		btn_sothuc.setFocusPainted(false);
@@ -237,9 +514,13 @@ public class Calculator extends JFrame {
 		JButton btn_am = new JButton("\u00B1");
 		btn_am.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				double ops = Double.parseDouble(textField_hienthi.getText());
-				ops = ops*(-1);
-				textField_hienthi.setText(String.valueOf(ops));
+				if(standard.isEnabled()) {
+					double ops = Double.parseDouble(standard_hienthi.getText());
+					standard_hienthi.setText(String.valueOf(ops*(-1)));
+					if(standard_hienthi.getText().endsWith(".0")) {
+						standard_hienthi.setText(standard_hienthi.getText().replace(".0", ""));
+					}
+				}
 			}
 		});
 		btn_am.setFocusPainted(false);
@@ -249,42 +530,14 @@ public class Calculator extends JFrame {
 		btn_am.setForeground(new Color(255, 255, 255));
 		btn_am.setBounds(171, 258, 80, 50);
 		contentPane.add(btn_am);
-		
-		JButton btn_pi = new JButton("π");
-		btn_pi.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				textField_hienthi.setText(textField_hienthi.getText()+"π");
-			}
-		});
-		btn_pi.setFocusPainted(false);
-		btn_pi.setForeground(Color.WHITE);
-		btn_pi.setFont(new Font("Calibri", Font.BOLD, 25));
-		btn_pi.setBorder(null);
-		btn_pi.setBackground(new Color(0, 102, 204));
-		btn_pi.setBounds(254, 205, 80, 50);
-		contentPane.add(btn_pi);
-		
-		JButton btn_phantram = new JButton("%\r\n");
-		btn_phantram.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				firstnumbers = Double.parseDouble(textField_hienthi.getText());
-				textField_hienthi.setText("");
-				operation = "phantram";
-			}
-		});
-		btn_phantram.setFocusPainted(false);
-		btn_phantram.setForeground(Color.WHITE);
-		btn_phantram.setFont(new Font("Calibri", Font.BOLD, 25));
-		btn_phantram.setBorder(null);
-		btn_phantram.setBackground(new Color(0, 102, 204));
-		btn_phantram.setBounds(171, 205, 80, 50);
-		contentPane.add(btn_phantram);
-		
+				
 		JButton btn_canbac2 = new JButton("√");
 		btn_canbac2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				firstnumbers = Double.parseDouble(textField_hienthi.getText());
-				operation = "sqrt";
+				if(standard.isEnabled()) {   
+					firstnumbers = Double.parseDouble(standard_hienthi.getText());
+					operation = "sqrt";
+				}
 			}
 		});
 		btn_canbac2.setFocusPainted(false);
@@ -298,10 +551,14 @@ public class Calculator extends JFrame {
 		JButton btn_xmun = new JButton("x²\r\n");
 		btn_xmun.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				firstnumbers = Double.parseDouble(textField_hienthi.getText());
-				double num_pow = firstnumbers;
-				textField_hienthi.setText(num_pow+"²");
-				textField_ketqua.setText(String.valueOf(Math.pow(num_pow,2)));
+				if(standard.isEnabled()) {
+					firstnumbers = Double.parseDouble(standard_hienthi.getText());
+					standard_hienthi.setText("("+firstnumbers+")"+"²");
+					standard_ketqua.setText(String.valueOf(Math.pow(firstnumbers,2)));
+					if(standard_ketqua.getText().endsWith(".0")) {
+						standard_ketqua.setText(standard_ketqua.getText().replace(".0", ""));
+					}  
+				}
 			}
 		});
 		btn_xmun.setFocusPainted(false);
@@ -316,8 +573,8 @@ public class Calculator extends JFrame {
 		JButton btn_cong = new JButton("+");
 		btn_cong.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				firstnumbers = Double.parseDouble(textField_hienthi.getText());
-				textField_hienthi.setText("");
+				firstnumbers = Double.parseDouble(standard_hienthi.getText());
+				standard_hienthi.setText("");
 				operation = "+";
 			}
 		});
@@ -332,9 +589,9 @@ public class Calculator extends JFrame {
 		JButton btn_tru = new JButton("\u2013");
 		btn_tru.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				firstnumbers = Double.parseDouble(textField_hienthi.getText());
-				textField_hienthi.setText("");
-				operation = "-";
+				firstnumbers = Double.parseDouble(standard_hienthi.getText());
+				standard_hienthi.setText("");
+				operation = "-";  	
 			}
 		});
 		btn_tru.setFocusPainted(false);
@@ -348,10 +605,9 @@ public class Calculator extends JFrame {
 		JButton btn_nhan = new JButton("×");
 		btn_nhan.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				firstnumbers = Double.parseDouble(textField_hienthi.getText());
-				textField_hienthi.setText("");
-				operation = "*";
-
+				firstnumbers = Double.parseDouble(standard_hienthi.getText());
+				standard_hienthi.setText("");
+				operation = "*";	
 			}
 		});
 		btn_nhan.setFocusPainted(false);
@@ -365,9 +621,9 @@ public class Calculator extends JFrame {
 		JButton btn_chia = new JButton("÷");
 		btn_chia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				firstnumbers = Double.parseDouble(textField_hienthi.getText());
-				textField_hienthi.setText("");
-				operation = "/";
+				firstnumbers = Double.parseDouble(standard_hienthi.getText());
+				standard_hienthi.setText("");
+				operation = "/";  
 			}
 		});
 		btn_chia.setFocusPainted(false);
@@ -377,43 +633,102 @@ public class Calculator extends JFrame {
 		btn_chia.setFont(new Font("Calibri", Font.BOLD, 30));
 		btn_chia.setBounds(254, 258, 80, 50);
 		contentPane.add(btn_chia);
+		
+		JButton btn_convert = new JButton("Convert");
+		btn_convert.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {  
+				if(temperature.isEnabled()) {
+					String box_1 = (String) temperature_donvi_1.getSelectedItem();
+					String box_2 = (String) temperature_donvi_2.getSelectedItem();
+					//---------------Đổi Celsius--------------- 
+					if(box_1.equals("Celsius")&&box_2.equals("Celsius")) {
+						double c = Double.parseDouble(temperature_hienthi.getText());
+						temperature_ketqua.setText(String.valueOf(c));
+					}
+					else if(box_1.equals("Celsius")&&box_2.equals("Kelvin")) {
+						double c = Double.parseDouble(temperature_hienthi.getText());
+						double k = (double)(c+273.15 );
+						temperature_ketqua.setText(String.valueOf(k));
+					}
+					else if(box_1.equals("Celsius")&&box_2.equals("Fahrenheit")) {
+						double c = Double.parseDouble(temperature_hienthi.getText());
+						double f = (double)(c*9/5+32);
+						temperature_ketqua.setText(String.valueOf(f));
+					}
+					//---------------Đổi Kevin--------------- 
+					else if(box_1.equals("Kelvin")&&box_2.equals("Kelvin")) {
+						double k = Double.parseDouble(temperature_hienthi.getText());
+						temperature_ketqua.setText(String.valueOf(k));
+					}
+					else if(box_1.equals("Kelvin")&&box_2.equals("Celsius")) {
+						double k = Double.parseDouble(temperature_hienthi.getText());
+				        double c = (double)(k-273.15);
+				        temperature_ketqua.setText(String.valueOf(c));
+					}
+					else if(box_1.equals("Kelvin")&&box_2.equals("Fahrenheit")) {
+						double k = Double.parseDouble(temperature_hienthi.getText());
+					    double f = (double)(k*9/5-459.67);
+					    temperature_ketqua.setText(String.valueOf(f));
+					}
+					//---------------Đổi Fahrenheit--------------- 
+					else if(box_1.equals("Fahrenheit")&&box_2.equals("Fahrenheit")) {
+						double f = Double.parseDouble(temperature_hienthi.getText());
+						temperature_ketqua.setText(String.valueOf(f));
+					}
+					else if(box_1.equals("Fahrenheit")&&box_2.equals("Celsius")) {
+						double f = Double.parseDouble(temperature_hienthi.getText());
+						double c = (double)((f-32)*5/9);
+				        temperature_ketqua.setText(String.valueOf(c));
+					}
+					else if(box_1.equals("Fahrenheit")&&box_2.equals("Kelvin")) {
+						double f = Double.parseDouble(temperature_hienthi.getText());
+						double k = (double)((f+459.67)*5/9);
+					    temperature_ketqua.setText(String.valueOf(k));
+					}
+					if(temperature_ketqua.getText().endsWith(".0")) {
+						temperature_ketqua.setText(temperature_ketqua.getText().replace(".0",""));
+					}
+					
+				}
+			}
+		});
+		btn_convert.setFocusPainted(false);
+		btn_convert.setForeground(Color.WHITE);
+		btn_convert.setFont(new Font("Calibri", Font.BOLD, 25));
+		btn_convert.setBorder(null);
+		btn_convert.setBackground(new Color(0, 102, 204));
+		btn_convert.setBounds(171, 205, 163, 50);
+		contentPane.add(btn_convert); 
 				
 		JButton btn_bang = new JButton("=");
 		btn_bang.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				secondnumbers = Double.parseDouble(textField_hienthi.getText());
-				double a = firstnumbers;
-				double b = secondnumbers;
-				double result=0;
-				if(operation == "+") {
-					result = a+b;
-					textField_ketqua.setText(String.valueOf(result));
-				}
-				if(operation == "-") {
-					result = a-b;
-					textField_ketqua.setText(String.valueOf(result));
-				}
-				else if(operation == "*") {
-					result = a*b;
-					textField_ketqua.setText(String.valueOf(result));
-				}
-				else if(operation == "/") {
-					if(b==0) {
-						textField_ketqua.setText(String.valueOf("Không chia được cho 0"));
+				if(standard.isEnabled()) {
+					secondnumbers = Double.parseDouble(standard_hienthi.getText());
+					if(operation == "+") {
+						standard_ketqua.setText(String.valueOf(firstnumbers+secondnumbers));
 					}
-					else {
-						result = a/b;
-						textField_ketqua.setText(String.valueOf(result));
+					else if(operation == "-") {
+						standard_ketqua.setText(String.valueOf(firstnumbers-secondnumbers));
 					}
-				}
-				else if(operation == "sqrt") {
-						result = Math.sqrt(a);
-						textField_hienthi.setText(String.valueOf("√("+a+")"));
-						textField_ketqua.setText(String.valueOf(result));
-				}
-				else if(operation == "phantram") {
-						result = a%b;
-						textField_ketqua.setText(String.valueOf(b));
+					else if(operation == "*") {
+						standard_ketqua.setText(String.valueOf(firstnumbers*secondnumbers));
+					}
+					else if(operation == "/") {
+						if(secondnumbers==0) {
+							standard_ketqua.setText(String.valueOf("Không chia được cho 0"));
+						}
+						else {
+							standard_ketqua.setText(String.valueOf(firstnumbers/secondnumbers));
+						}
+					}
+					else if(operation == "sqrt") {
+							standard_hienthi.setText(String.valueOf("√("+firstnumbers+")"));
+							standard_ketqua.setText(String.valueOf(Math.sqrt(firstnumbers)));
+					}
+					if(standard_ketqua.getText().endsWith(".0")) {
+						standard_ketqua.setText(standard_ketqua.getText().replace(".0",""));
+					}
 				}
 			}
 		});
@@ -428,10 +743,19 @@ public class Calculator extends JFrame {
 		//---------Button action---------
 		JButton btn_xoahet = new JButton("AC");
 		btn_xoahet.addMouseListener(new MouseAdapter() {
-			@Override
 			public void mouseClicked(MouseEvent e) {
-				textField_hienthi.setText(null);
-				textField_ketqua.setText(null);
+				if(standard.isEnabled()) {
+					standard_hienthi.setText(null);
+					standard_ketqua.setText(null);
+				}
+				if(length.isEnabled()) {
+					length_hienthi.setText(null);
+					length_ketqua.setText(null);
+				}
+				if(temperature.isEnabled()) {
+					temperature_hienthi.setText(null);
+					temperature_ketqua.setText(null);
+				}
 			}
 		});
 		btn_xoahet.setFocusPainted(false);
@@ -446,11 +770,29 @@ public class Calculator extends JFrame {
 		btn_xoa1phantu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String Backspace=null;
-				if(textField_hienthi.getText().length()>0) {
-					StringBuilder builder =  new StringBuilder(textField_hienthi.getText());
-					builder.deleteCharAt(textField_hienthi.getText().length()-1);
-					Backspace = builder.toString();
-					textField_hienthi.setText(Backspace);
+				if(standard.isEnabled()) {
+					if(standard_hienthi.getText().length()>0) {
+						StringBuilder builder =  new StringBuilder(standard_hienthi.getText());
+						builder.deleteCharAt(standard_hienthi.getText().length()-1);
+						Backspace = builder.toString();
+						standard_hienthi.setText(Backspace);
+					}
+				}
+				if(length.isEnabled()) {
+					if(length_hienthi.getText().length()>0) {
+						StringBuilder builder =  new StringBuilder(length_hienthi.getText());
+						builder.deleteCharAt(length_hienthi.getText().length()-1);
+						Backspace = builder.toString();
+						length_hienthi.setText(Backspace);
+					}
+				}
+				if(temperature.isEnabled()) {
+					if(temperature_hienthi.getText().length()>0) {
+						StringBuilder builder =  new StringBuilder(temperature_hienthi.getText());
+						builder.deleteCharAt(temperature_hienthi.getText().length()-1);
+						Backspace = builder.toString();
+						temperature_hienthi.setText(Backspace);
+					}
 				}
 			}
 		});
@@ -462,28 +804,40 @@ public class Calculator extends JFrame {
 		btn_xoa1phantu.setBounds(88, 205, 80, 50);
 		contentPane.add(btn_xoa1phantu);
 		
-		//---------Hiển thị---------
-		textField_hienthi = new JTextField();
-		textField_hienthi.setEditable(false);
-		textField_hienthi.setBorder(null);
-		textField_hienthi.setBackground(new Color(247, 97, 87));
-		textField_hienthi.setHorizontalAlignment(SwingConstants.TRAILING);
-		textField_hienthi.setFont(new Font("Calibri", Font.BOLD, 25));
-		textField_hienthi.setForeground(Color.WHITE);
-		textField_hienthi.setBounds(5, 70, 329, 60);
-		contentPane.add(textField_hienthi);
-		textField_hienthi.setColumns(10);
+		//---------Đơn vị---------
+		length_donvi_1 = new JComboBox();
+		length_donvi_1.setBackground(new Color(255, 255, 51));
+		length_donvi_1.setMaximumRowCount(9);
+		length_donvi_1.setModel(new DefaultComboBoxModel(new String[] {"Micromet", "Millimet", "Centimet", "Met", "Kilomet", "Inch", "Feet", "Yard", "Mile"}));
+		length_donvi_1.setFont(new Font("Segoe UI Black", Font.PLAIN, 16));
+		length_donvi_1.setBounds(239, 88, 95, 22);
+		contentPane.add(length_donvi_1);
 		
-		textField_ketqua = new JTextField();
-		textField_ketqua.setBorder(null);
-		textField_ketqua.setBackground(new Color(247, 97, 87));
-		textField_ketqua.setHorizontalAlignment(SwingConstants.TRAILING);
-		textField_ketqua.setEditable(false);
-		textField_ketqua.setFont(new Font("Calibri", Font.BOLD, 25));
-		textField_ketqua.setForeground(Color.WHITE);
-		textField_ketqua.setColumns(10);
-		textField_ketqua.setBounds(5, 132, 329, 60);
-		contentPane.add(textField_ketqua);
+		length_donvi_2 = new JComboBox();
+		length_donvi_2.setModel(new DefaultComboBoxModel(new String[] {"Micromet", "Millimet", "Centimet", "Met", "Kilomet", "Inch", "Feet", "Yard", "Mile"}));
+		length_donvi_2.setMaximumRowCount(9);
+		length_donvi_2.setFont(new Font("Segoe UI Black", Font.PLAIN, 16));
+		length_donvi_2.setBackground(new Color(255, 255, 51));
+		length_donvi_2.setBounds(239, 175, 95, 22);
+		contentPane.add(length_donvi_2);
+
+		temperature_donvi_1 = new JComboBox();
+		temperature_donvi_1.setBackground(new Color(255, 255, 51));
+		temperature_donvi_1.setMaximumRowCount(9);
+		temperature_donvi_1.setModel(new DefaultComboBoxModel(new String[] {"Celsius", "Kelvin", "Fahrenheit"}));
+		temperature_donvi_1.setFont(new Font("Segoe UI Black", Font.PLAIN, 16));
+		temperature_donvi_1.setBounds(239, 88, 95, 22);
+		contentPane.add(temperature_donvi_1);
 		
+		temperature_donvi_2 = new JComboBox();
+		temperature_donvi_2.setModel(new DefaultComboBoxModel(new String[] {"Celsius", "Kelvin", "Fahrenheit"}));
+		temperature_donvi_2.setMaximumRowCount(9);
+		temperature_donvi_2.setFont(new Font("Segoe UI Black", Font.PLAIN, 16));
+		temperature_donvi_2.setBackground(new Color(255, 255, 51));
+		temperature_donvi_2.setBounds(239, 175, 95, 22);
+		contentPane.add(temperature_donvi_2);
+		
+		
+		}
 	}
-}
+
