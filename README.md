@@ -9,4 +9,5 @@ Miêu tả:
 <h1>Các phiên bản: </h1>
 
 - Version 0.1: Có chức năng tính toán cộng trừ nhân chia cơ bản 
+- Version 0.1.1: Thêm chức năng đổi nhiệt độ
 
