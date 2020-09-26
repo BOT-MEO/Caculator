@@ -1,5 +1,3 @@
-
-Ý tưởng:
 <h1>Miêu tả: </h1>
 
 - Đây là một máy tính tay đơn giản. 
